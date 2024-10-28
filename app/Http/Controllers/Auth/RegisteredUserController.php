@@ -35,22 +35,21 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+    
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
-        // Trigger the Registered event
+    
         event(new Registered($user));
-
-        // Send notification to user
-        $user->notify(new UserRegisteredNotification());
-
+    
+        $user->notify(new UserRegisteredNotification($user));
+    
         // Log the user in
         Auth::login($user);
-
+    
         return redirect(route('dashboard'));
     }
+    
 }
