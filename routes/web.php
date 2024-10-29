@@ -1,11 +1,21 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('events')->name('events.')->group(function () {
+    // Rutas del resource
+    Route::resource('/', EventController::class);
+
+    // Rutas adicionales
+    Route::get('/availables', [EventController::class, 'availables'])->name('availables');
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
