@@ -9,10 +9,10 @@ Route::get('/', function () {
 });
 
 Route::prefix('events')->name('events.')->group(function () {
-    // Rutas del resource
+    // Resource Routes
     Route::resource('/', EventController::class);
 
-    // Rutas adicionales
+    // Additional routes
     Route::get('/availables', [EventController::class, 'availables'])->name('availables');
 });
 
