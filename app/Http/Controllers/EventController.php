@@ -20,15 +20,17 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
-    }
+        return view(view: 'events.create');    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validated();
+
+        Event::create($validatedData);
+        return redirect()->route(route: 'events.index')->with('success', 'The event was created correctly.');
     }
 
     /**
