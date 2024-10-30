@@ -23,8 +23,7 @@
             @yield('content')
         </div>
     </main>
-</html>
-
+    <script src="{{ asset('js/flyonui.js') }}"></script>
 </body>
 
 </html>

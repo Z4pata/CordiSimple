@@ -37,6 +37,9 @@
                         </tr>
                     @endforelse
 
+
+                    {{-- this is an example of non-functional events --}}
+
                     {{-- <tr>
                         <td class="text-nowrap">Partido de Nacional</td>
                         <td>10/10/2025</td>
