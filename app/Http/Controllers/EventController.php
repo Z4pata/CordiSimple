@@ -20,7 +20,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view(view: 'events.create');    }
+        return view(view: 'events.create');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -39,6 +40,15 @@ class EventController extends Controller
     public function show(Event $event)
     {
         return view('events.show', compact('event'));
+    }
+
+    /**
+     * Display the available events.
+     */
+    public function showAvailables()
+    {
+        $events = Event::where('status', 'Available')->get();
+        return view('events.availables', compact('events'));
     }
 
     /**
