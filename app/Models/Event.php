@@ -50,7 +50,7 @@ class Event extends Model
 
     public function user()
     {
-        return $this->belongsTo(related: User::class);
+        return $this->belongsTo(User::class, 'admin_id');
     }
 
     /*
@@ -69,6 +69,22 @@ class Event extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
+
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    public function getLocationAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    public function getStatusAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
 
     /*
     |--------------------------------------------------------------------------
