@@ -1,5 +1,6 @@
 @props(['event'])
 
+{{-- Modal to confirm the elimination of events. --}}
 <div id="modal-delete{{ $event->id }}" class="overlay modal overlay-open:opacity-100 hidden" role="dialog" tabindex="-1">
     <div class="modal-dialog overlay-open:opacity-100">
         <div class="modal-content">

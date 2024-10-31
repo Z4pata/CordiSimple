@@ -21,7 +21,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::component('status-events', 'statusEvents');
+        // The component is instantiated to display event details.
         Blade::component(class: 'modal-show-events', alias: 'modalShowEvents');
+        // The component is instantiated to confirm the deletion.
         Blade::component(class: 'modal-delete-events', alias: 'modalDeleteEvents');
     }
 }
