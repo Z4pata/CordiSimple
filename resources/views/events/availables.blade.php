@@ -36,41 +36,6 @@
                             <td colspan="6" class="px-6 py-4 whitespace-nowrap text-center">No events available</td>
                         </tr>
                     @endforelse
-
-
-                    {{-- this is an example of non-functional events --}}
-
-                    {{-- <tr>
-                        <td class="text-nowrap">Partido de Nacional</td>
-                        <td>10/10/2025</td>
-                        <td class="text-nowrap">07:00 PM</td>
-                        <td class="text-nowrap">Medellín, Antioquia</td>
-                        <td><span class="badge badge-soft badge-success text-xs">Available</span></td>
-                        <td>
-                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
-                                    class="icon-[tabler--check]"></span></button>
-                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
-                                    class="icon-[tabler--alarm]"></span></button>
-                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
-                                    class="icon-[tabler--dots-vertical]"></span></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-nowrap">Partido de Junior</td>
-                        <td>20/05/2025</td>
-                        <td class="text-nowrap">07:00 PM</td>
-                        <td class="text-nowrap">Barranquilla, Atlántico</td>
-                        <td><span class="badge badge-soft badge-success text-xs">Available</span></td>
-                        <td>
-                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
-                                    class="icon-[tabler--check]"></span></button>
-                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
-                                    class="icon-[tabler--alarm]"></span></button>
-                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
-                                    class="icon-[tabler--dots-vertical]"></span></button>
-                        </td>
-                    </tr> --}}
-
                 </tbody>
             </table>
         </div>
