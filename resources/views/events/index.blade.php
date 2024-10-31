@@ -22,45 +22,21 @@
                             <td class="text-nowrap">{{ $event->time }}</td>
                             <td class="text-nowrap">{{ $event->location }}</td>
                             <td><x-status-events :status="$event->status" /></td>
-                            <div id="basic-modal" class="overlay modal overlay-open:opacity-100 hidden" role="dialog"
-                                tabindex="-1">
-                                <div class="modal-dialog overlay-open:opacity-100">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h3 class="modal-title">General Information</h3>
-                                            <button type="button"
-                                                class="btn btn-text btn-circle btn-sm absolute end-3 top-3"
-                                                aria-label="Close" data-overlay="#basic-modal">
-                                                <span class="icon-[tabler--x] size-4"></span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p><span class="font-bold">Name: </span>{{ $event->name }}</p>
-                                            <p><span class="font-bold">Description: </span>{{ $event->description }}</p>
-                                            <p><span class="font-bold">Date: </span>{{ $event->date }}</p>
-                                            <p><span class="font-bold">Time: </span>{{ $event->time }}</p>
-                                            <p><span class="font-bold">Location: </span>{{ $event->location }}</p>
-                                            <p><span class="font-bold">Max Seats: </span>{{ $event->max_seats }}</p>
-                                            <p><span class="font-bold">Available Seats: </span>{{ $event->available_seats }}</p>
-                                            <p><span class="font-bold">Status: </span>{{ $event->status }}</p>
-                                            <p><span class="font-bold">Created By: </span>{{ $event->user?->name ?? 'Name is not available' }}</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-soft btn-secondary"
-                                                data-overlay="#basic-modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <x-modal-show-events :event="$event" />
+                            <x-modal-delete-events :event="$event" />
                             <td>
                                 <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
                                         class="icon-[tabler--edit]"></span></button>
-                                <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
+                                <button type="button" title="Delete Event" class="btn btn-circle btn-text btn-sm"
+                                    aria-label="Action button" aria-haspopup="dialog" aria-expanded="false"
+                                    aria-controls="modal-delete{{ $event->id }}"
+                                    data-overlay="#modal-delete{{ $event->id }}"><span
                                         class="icon-[tabler--trash]"></span></button>
-                                <button type="button" class="btn btn-circle btn-text btn-sm" aria-label="Action button"
-                                    aria-haspopup="dialog" aria-expanded="false" aria-controls="basic-modal"
-                                    data-overlay="#basic-modal"><span class="icon-[tabler--list-search]"></span></button>
+                                <button type="button" title="Show Details" class="btn btn-circle btn-text btn-sm"
+                                    aria-label="Action button" aria-haspopup="dialog" aria-expanded="false"
+                                    aria-controls="modal-show{{ $event->id }}"
+                                    data-overlay="#modal-show{{ $event->id }}"><span
+                                        class="icon-[tabler--list-search]"></span></button>
                             </td>
                         </tr>
                     @empty
