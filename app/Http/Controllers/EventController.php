@@ -47,9 +47,9 @@ class EventController extends Controller
     /**
      * Display the available events.
      */
-    public function showAvailables()
+    public function availables()
     {
-        $events = Event::where('status', 'Available')->get();
+        $events = Event::where('status', operator: 'Available')->get();
         return view('events.availables', compact('events'));
     }
 
