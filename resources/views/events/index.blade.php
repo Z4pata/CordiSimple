@@ -1,9 +1,12 @@
 @extends('layouts.event')
 
 @section('content')
+<div class="my-8">
+    <h1 class="text-center text-5xl font-semibold font-mono  text-orange-600/75">EVENTS</h1>
+</div>
     {{-- create event button --}}
     <div class="flex justify-end m-6">
-        <button class="btn btn-gradient btn-accent">
+        <button type="button" class="btn btn-gradient btn-warning" aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-create" data-overlay="#modal-create">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
                 <g fill="none">
                     <path
@@ -13,7 +16,9 @@
                 </g>
             </svg> New Event
         </button>
+        <x-modal-create-events/>
     </div>
+    {{-- Table to display the events --}}
     <div class="card w-full">
         <div class="w-full overflow-x-auto">
             <table class="table">
