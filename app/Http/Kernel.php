@@ -63,6 +63,6 @@ class Kernel extends HttpKernel
     
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('app:update-event-status')->everyFiveSeconds();
+        $schedule->command('app:update-event-status')->everyFiveSeconds()->withoutOverlapping();
     }
 }
