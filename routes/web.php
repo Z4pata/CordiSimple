@@ -4,6 +4,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\EventController;
 use App\Models\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -11,18 +12,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('events')->name('events.')->group(function () {
-    // Resource Routes
+// Route for dashboard
+Route::get('/admin/dashboard', [EventController::class, 'index'])->middleware(['auth', 'verified'])->name('events.index');
+Route::get('/user/dashboard', [EventController::class, 'available'])->middleware(['auth', 'verified'])->name('events.available');
+
     Route::resource('/', EventController::class);
 
-    // Additional routes
-    Route::get('/availables', [EventController::class, 'availables'])->name('availables');
-});
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');

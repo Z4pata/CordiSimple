@@ -21,6 +21,7 @@ class EventController extends Controller
      */
     public function create()
     {
+        //
         return view(view: 'events.create');
     }
 
@@ -38,6 +39,7 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
+        //
     public function show(string $id)
     {
         $event = Event::findOrFail($id);
@@ -76,4 +78,4 @@ class EventController extends Controller
     {
         //
     }
-}
+

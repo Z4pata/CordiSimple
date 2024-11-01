@@ -32,9 +32,9 @@ class AuthenticatedSessionController extends Controller
 
         // Verify if the user is an administrator
         if ($user->isAdmin()) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('events.index');
         } else {
-            return redirect()->route('user.dashboard');
+            return redirect()->route('events.available');
         }
     }
 
