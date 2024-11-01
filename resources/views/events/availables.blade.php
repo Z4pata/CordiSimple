@@ -17,11 +17,11 @@
                 <tbody>
                     @forelse ($events as $event)
                         <tr>
-                            <td class="text-nowrap">{{ $event . name }}</td>
-                            <td>{{ $event . date }}</td>
-                            <td class="text-nowrap">{{ $event . time }}</td>
-                            <td class="text-nowrap">{{ $event . location }}</td>
-                            <td><span class="badge badge-soft badge-success text-xs">{{ $event . status }}</span></td>
+                            <td class="text-nowrap">{{ $event -> name }}</td>
+                            <td>{{ $event -> date }}</td>
+                            <td class="text-nowrap">{{ $event -> time }}</td>
+                            <td class="text-nowrap">{{ $event -> location }}</td>
+                            <td><span class="badge badge-soft badge-success text-xs">{{ $event -> status }}</span></td>
                             <td>
                                 <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
                                         class="icon-[tabler--check]"></span></button>
