@@ -12,7 +12,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::all();
+        return view('events.index', data: compact('events'));
     }
 
     /**
@@ -20,7 +21,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view(view: 'events.create');
     }
 
     /**
@@ -28,15 +29,28 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validated();
+
+        Event::create($validatedData);
+        return redirect()->route(route: 'events.index')->with('success', 'The event was created correctly.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Event $event)
+    public function show(string $id)
     {
-        //
+        $event = Event::findOrFail($id);
+        return view('events.show', data: compact('event'));
+    }
+
+    /**
+     * Display the available events.
+     */
+    public function availables()
+    {
+        $events = Event::where('status', operator: 'Available')->get();
+        return view('events.availables', compact('events'));
     }
 
     /**

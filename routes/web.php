@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -9,6 +10,15 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('events')->name('events.')->group(function () {
+    // Resource Routes
+    Route::resource('/', EventController::class);
+
+    // Additional routes
+    Route::get('/availables', [EventController::class, 'availables'])->name('availables');
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
