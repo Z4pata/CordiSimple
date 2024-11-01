@@ -74,6 +74,10 @@ class Event extends Model
     {
         return ucfirst($value);
     }
+    public function getDescriptionAttribute($value)
+    {
+        return ucfirst($value);
+    }
 
     public function getLocationAttribute($value)
     {
