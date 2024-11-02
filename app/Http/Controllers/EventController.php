@@ -49,7 +49,7 @@ class EventController extends Controller
     /**
      * Display the available events.
      */
-    public function availables()
+    public function available()
     {
         $events = Event::where('status', operator: 'Available')->get();
         return view('events.availables', compact('events'));
@@ -79,3 +79,4 @@ class EventController extends Controller
         //
     }
 
+}
