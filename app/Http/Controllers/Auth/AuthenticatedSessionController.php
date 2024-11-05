@@ -27,7 +27,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        // Obtener el usuario autenticado
+        // Obtains athenticated user
         $user = Auth::user();
 
         // Verify if the user is an administrator
