@@ -45,7 +45,9 @@
 <body class="antialiased bg-cWhite dark:bg-cBlack">
 
     <!-- Header -->
-    <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-2 ">
+
+    @include('layouts.navigation')
+    {{-- <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-2 ">
         <div class="flex lg:justify-center lg:col-span-1">
             <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mx-12">CordiSimple</h1>
         </div>
@@ -55,14 +57,6 @@
                 @auth
                     <a href="{{ Auth::user()->isAdmin() ? url('/admin/dashboard') : url('/dashboard') }}"
                         class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">Dashboard</a>
-                        @if (Route::has('logout'))
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <input type="submit"
-                                class="cursor-pointer rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                value="log out">
-                        </form>
-                    @endif
                 @else
                     <a href="{{ route('login') }}"
                         class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">Log
@@ -74,7 +68,7 @@
                 @endauth
             </nav>
         @endif
-    </header>
+    </header> --}}
 
     <!-- Main Content -->
     <main class="w-full">
