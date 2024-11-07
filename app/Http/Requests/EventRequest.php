@@ -28,7 +28,7 @@ class EventRequest extends FormRequest
             'time' => 'required|date_format:H:i',
             'location' => 'required|string|max:150',
             'max_seats' => 'required|integer|min:1',
-            'available_seats' => 'required|integer|min:0|max:max_seats',
+            'available_seats' => 'required|integer|min:0|max:'.$this->input('max_seats'),
             'status' => 'required|string|max:100',
             'admin_id' => 'required|exists:users,id',
         ];

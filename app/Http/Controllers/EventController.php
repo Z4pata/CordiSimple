@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
@@ -21,25 +22,25 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
         return view(view: 'events.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
         $validatedData = $request->validated();
-
+        logger('TESTEO DE LA FUNCIONALIDAD DE GUARDAR -=> ' . $validatedData);
+        dd($validatedData); // Verifica los datos validados
         Event::create($validatedData);
-        return redirect()->route(route: 'events.index')->with('success', 'The event was created correctly.');
+        return redirect()->route('events.index')->with('success', 'The event was created correctly.');
     }
 
     /**
      * Display the specified resource.
      */
-        //
+    //
     public function show(string $id)
     {
         $event = Event::findOrFail($id);
@@ -68,7 +69,7 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        logger('TESTEO DE LA FUNCIONALIDAD DE ACTUALIZAR -=> ');
     }
 
     /**
@@ -78,5 +79,4 @@ class EventController extends Controller
     {
         //
     }
-
 }

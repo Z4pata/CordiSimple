@@ -7,7 +7,7 @@
     {{-- create event button --}}
     <div class="flex justify-end m-6">
         <button type="button" class="btn btn-gradient btn-warning" aria-haspopup="dialog" aria-expanded="false"
-            aria-controls="modal-create" data-overlay="#modal-create">
+            aria-controls="modal-create{{ 0 }}" data-overlay="#modal-create{{ 0 }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
                 <g fill="none">
                     <path
@@ -17,8 +17,9 @@
                 </g>
             </svg> New Event
         </button>
-        <x-modal-create-events title="Create New Event" />
+        <x-modal-create-events />
     </div>
+
     {{-- Table to display the events --}}
     <div class="card w-full">
         <div class="w-full overflow-x-auto">
@@ -49,17 +50,7 @@
 
                             {{-- Calls the component to confirm event deletion and sends the object as a parameter. --}}
                             <x-modal-delete-events :event="$event" />
-
-                            {{-- Calls the component to edit event and sends the object as a parameter. --}}
-                            <x-modal-create-events :event="$event" />
-
                             <td>
-                                {{-- <button type="button" title="Edit Event" class="btn btn-circle btn-text btn-sm"
-                                    aria-label="Action button" aria-haspopup="dialog" aria-expanded="false"
-                                    aria-controls="modal-edit{{ $event }}"
-                                    data-overlay="#modal-edit{{ $event }}"><span
-                                        class="icon-[tabler--edit]"></span></button> --}}
-
                                 <button type="button" title="Delete Event" class="btn btn-circle btn-text btn-sm"
                                     aria-label="Action button" aria-haspopup="dialog" aria-expanded="false"
                                     aria-controls="modal-delete{{ $event->id }}"
@@ -71,7 +62,14 @@
                                     aria-controls="modal-show{{ $event->id }}"
                                     data-overlay="#modal-show{{ $event->id }}"><span
                                         class="icon-[tabler--list-search]"></span></button>
+
+                                <button type="button" title="Edit Event" class="btn btn-circle btn-text btn-sm"
+                                    aria-label="Action button" aria-haspopup="dialog" aria-expanded="false"
+                                    aria-controls="modal-create{{ $event->id }}" data-overlay="#modal-create{{ $event->id }}"><span
+                                        class="icon-[tabler--edit]"></span></button>
                             </td>
+                            {{-- Calls the component to edit event and sends the object as a parameter. --}}
+                            <x-modal-create-events :event="$event" />
                         </tr>
                     @empty
                         <tr>
