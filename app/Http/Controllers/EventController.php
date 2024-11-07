@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -31,7 +32,9 @@ class EventController extends Controller
     public function store(EventRequest $request)
     {
         $validatedData = $request->validated();
-        Event::create($validatedData);
+        $adminId = Auth::id();
+        $data = array_merge($validatedData, ['admin_id' => $adminId]);
+        Event::create(attributes: $data);
         return redirect()->route('events.index')->with('success', 'The event was created correctly.');
     }
 

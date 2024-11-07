@@ -171,7 +171,7 @@
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
 
-                    <label for="admin_id"
+                    {{-- <label for="admin_id"
                         class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
                         <input type="number" id="admin_id" name="admin_id" placeholder="Admin Id" min="0"
                             value="{{ old('admin_id', $event->admin_id ?? '') }}"
@@ -184,7 +184,7 @@
                     </label>
                     @error('admin_id')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
+                    @enderror --}}
 
                 </div>
 
