@@ -25,9 +25,9 @@
 
                     <div class="mb-7 flex gap-4 max-sm:flex-col">
 
-                        <label for="EventName"
+                        <label for="name"
                             class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
-                            <input type="text" id="EventName" placeholder="Musical concert"
+                            <input type="text" id="name" placeholder="Musical concert" name="name"
                                 value="{{ old('name', $event->name ?? '') }}"
                                 class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm" />
                             <span
@@ -35,6 +35,9 @@
                                 Name
                             </span>
                         </label>
+                        @error('name')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
 
                         <label for="date"
                             class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
@@ -47,6 +50,9 @@
                                 Date
                             </span>
                         </label>
+                        @error('date')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
 
                     </div>
 
@@ -63,6 +69,9 @@
                                 Time
                             </span>
                         </label>
+                        @error('time')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
 
                         <label for="status"
                             class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
@@ -85,6 +94,9 @@
                                 Status
                             </span>
                         </label>
+                        @error('status')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
 
                     </div>
 
@@ -101,6 +113,9 @@
                                 Max Seats
                             </span>
                         </label>
+                        @error('max_seats')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
 
                         @if (!$event)
                             <label for="available_seats"
@@ -115,6 +130,9 @@
                                     Available Seats
                                 </span>
                             </label>
+                            @error('available_seats')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         @endif
 
                     </div>
@@ -132,6 +150,9 @@
                                 Location
                             </span>
                         </label>
+                        @error('location')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
 
                     </div>
 
@@ -146,6 +167,24 @@
                             Description
                         </span>
                     </label>
+                    @error('description')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+
+                    <label for="admin_id"
+                        class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
+                        <input type="number" id="admin_id" name="admin_id" placeholder="Admin Id" min="0"
+                            value="{{ old('admin_id', $event->admin_id ?? '') }}"
+                            class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                            required />
+                        <span
+                            class="absolute start-0 top-2 -translate-y-1/2 text-xs text-orange-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
+                            Id Administrator
+                        </span>
+                    </label>
+                    @error('admin_id')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
 
                 </div>
 

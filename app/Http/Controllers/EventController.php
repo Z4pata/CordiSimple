@@ -31,8 +31,6 @@ class EventController extends Controller
     public function store(EventRequest $request)
     {
         $validatedData = $request->validated();
-        logger('TESTEO DE LA FUNCIONALIDAD DE GUARDAR -=> ' . $validatedData);
-        dd($validatedData); // Verifica los datos validados
         Event::create($validatedData);
         return redirect()->route('events.index')->with('success', 'The event was created correctly.');
     }
