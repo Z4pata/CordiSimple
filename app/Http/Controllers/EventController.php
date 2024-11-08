@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -14,6 +15,7 @@ class EventController extends Controller
      */
     public function index()
     {
+        Artisan::call('app:update-event-status');
         $events = Event::all();
         return view('events.index', data: compact('events'));
     }
@@ -53,6 +55,7 @@ class EventController extends Controller
      */
     public function available()
     {
+        Artisan::call('app:update-event-status');
         $events = Event::where('status', operator: 'Available')->get();
         return view('events.availables', compact('events'));
     }
