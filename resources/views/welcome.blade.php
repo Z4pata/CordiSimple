@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CordiSimple</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body {
             position: relative;
@@ -45,53 +45,48 @@
 <body class="antialiased bg-cWhite dark:bg-cBlack">
 
     <!-- Header -->
-    <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-2 ">
-        <div class="flex lg:justify-center lg:col-span-1">
-            <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mx-12">CordiSimple</h1>
-        </div>
-        @if (Route::has('login'))
-            <nav class="mx-12 flex justify-center col-2">
-                @auth
-                    <a href="{{ url('/dashboard') }}"
-                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}"
-                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">Log
-                        in</a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">Register</a>
-                    @endif
-                @endauth
-            </nav>
-        @endif
-    </header>
-
+    @include('layouts.navigation')
+    
     <!-- Main Content -->
     <main class="w-full">
         <section id="welcome" class="h-screen flex flex-col justify-center items-center">
             <h2 class="text-cWhite text-8xl max-w-6xl text-center mb-8 font-bold">
-                Welcome to <span class="bg-gradient-to-r from-cRed to-cBlack dark:to-cWhite bg-clip-text text-transparent">CordiSimple</span> the best plataform for managing <span class="bg-gradient-to-l from-cRed to-cBlack dark:to-cWhite bg-clip-text text-transparent">events</span> and reservations
+                Welcome to <span
+                    class="bg-gradient-to-r from-cRed to-cBlack dark:to-cWhite bg-clip-text text-transparent">CordiSimple</span>
+                the best plataform for managing <span
+                    class="bg-gradient-to-l from-cRed to-cBlack dark:to-cWhite bg-clip-text text-transparent">events</span>
+                and reservations
             </h2>
             <div className="flex justify-center">
                 <a href="{{ route('register') }}"
-                class="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#F2471D,45%,#E0E0E0,55%,#F2471D)] bg-[length:200%_100%] px-6 font-medium text-cWhite transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                Get Started
-            </a>
+                    class="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#F2471D,45%,#E0E0E0,55%,#F2471D)] bg-[length:200%_100%] px-6 font-medium text-cWhite transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                    Get Started
+                </a>
             </div>
         </section>
         <section id="aboutUs" class="flex justify-center items-center mt-10 w-full h-screen">
             <div class="bg-cBlack w-1/2 h-full flex flex-col justify-center items-center">
                 <h2 class="text-cRed text-6xl mb-4 font-bold">About Us</h2>
-                <p class="text-cWhite max-w-xl text-lg tracking-wide text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus ducimus explicabo non, delectus cum, vero qui odit voluptas, modi voluptate praesentium quisquam dicta. Deserunt impedit quos voluptatum perspiciatis temporibus harum.
-                Ea ad dolore aliquid, aliquam a debitis ut provident asperiores accusantium dolorum fugiat impedit voluptas quos minima non suscipit soluta recusandae sapiente tenetur facilis, repellat itaque quidem. Perferendis, consectetur? Temporibus.
-                <br>
-                Ratione maxime dolor qui fugit ipsum reiciendis perferendis totam veritatis! Mollitia, eveniet doloremque maiores nisi eaque ea molestiae dicta eligendi ipsam neque, atque blanditiis consequuntur debitis. Temporibus dicta maxime eaque.
-                Libero exercitationem fugit molestiae dolorem. Quisquam labore facilis architecto, molestias totam recusandae tenetur, culpa repellendus consequatur quos libero necessitatibus earum ipsum alias repudiandae quidem omnis sequi autem enim tempora expedita!
-                Pariatur commodi minus sequi sed qui quis explicabo quia. Error, nihil incidunt in eius quisquam nostrum fugit, ipsa itaque dicta quidem animi fuga labore, corporis eos quos ut? Cum, perferendis.</p>
+                <p class="text-cWhite max-w-xl text-lg tracking-wide text-center">Lorem ipsum dolor sit amet
+                    consectetur, adipisicing elit. Possimus ducimus explicabo non, delectus cum, vero qui odit voluptas,
+                    modi voluptate praesentium quisquam dicta. Deserunt impedit quos voluptatum perspiciatis temporibus
+                    harum.
+                    Ea ad dolore aliquid, aliquam a debitis ut provident asperiores accusantium dolorum fugiat impedit
+                    voluptas quos minima non suscipit soluta recusandae sapiente tenetur facilis, repellat itaque
+                    quidem. Perferendis, consectetur? Temporibus.
+                    <br>
+                    Ratione maxime dolor qui fugit ipsum reiciendis perferendis totam veritatis! Mollitia, eveniet
+                    doloremque maiores nisi eaque ea molestiae dicta eligendi ipsam neque, atque blanditiis consequuntur
+                    debitis. Temporibus dicta maxime eaque.
+                    Libero exercitationem fugit molestiae dolorem. Quisquam labore facilis architecto, molestias totam
+                    recusandae tenetur, culpa repellendus consequatur quos libero necessitatibus earum ipsum alias
+                    repudiandae quidem omnis sequi autem enim tempora expedita!
+                    Pariatur commodi minus sequi sed qui quis explicabo quia. Error, nihil incidunt in eius quisquam
+                    nostrum fugit, ipsa itaque dicta quidem animi fuga labore, corporis eos quos ut? Cum, perferendis.
+                </p>
             </div>
             <div class="w-1/2 h-full flex justify-center items-center bg-cWhite">
-                <img src="{{ asset('build/assets/logo.png')}}" alt="Logo" class="w-96 h-96 fill-current" />
+                <img src="{{ asset('build/assets/logo.png') }}" alt="Logo" class="w-96 h-96 fill-current" />
             </div>
         </section>
 
@@ -130,13 +125,16 @@
 
         <section class="flex flex-col justify-center items-center mt-10">
             <h2 class="text-cBlack dark:text-cWhite text-8xl max-w-6xl text-center mb-8 font-bold">
-                <span class="bg-gradient-to-r from-cRed to-cBlack dark:to-cWhite bg-clip-text text-transparent">Happiness</span> is meant to be shared, and every event is an opportunity to <span class="bg-gradient-to-l from-cRed to-cBlack dark:to-cWhite bg-clip-text text-transparent">celebrate.</span>
+                <span
+                    class="bg-gradient-to-r from-cRed to-cBlack dark:to-cWhite bg-clip-text text-transparent">Happiness</span>
+                is meant to be shared, and every event is an opportunity to <span
+                    class="bg-gradient-to-l from-cRed to-cBlack dark:to-cWhite bg-clip-text text-transparent">celebrate.</span>
             </h2>
             <div className="flex justify-center">
                 <a href="{{ route('register') }}"
-                class="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#F2471D,45%,#E0E0E0,55%,#F2471D)] bg-[length:200%_100%] px-6 font-medium text-cWhite transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                Get Started
-            </a>
+                    class="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#F2471D,45%,#E0E0E0,55%,#F2471D)] bg-[length:200%_100%] px-6 font-medium text-cWhite transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                    Get Started
+                </a>
             </div>
             <footer class="flex justify-around items-center h-20 mt-8 w-full bg-cBlack">
                 <div class="flex items-center text-cWhite text-2xl">
@@ -153,6 +151,7 @@
 
     <!-- Horizontal Scroll JavaScript -->
     <script>
+        
         document.addEventListener("DOMContentLoaded", function() {
             const horizontalScroll = document.getElementById("horizontal-scroll");
             let startX, scrollLeft;

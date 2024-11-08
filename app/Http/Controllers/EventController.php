@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -14,6 +15,7 @@ class EventController extends Controller
      */
     public function index()
     {
+        Artisan::call('app:update-event-status');
         $events = Event::all();
         return view('events.index', data: compact('events'));
     }
@@ -53,6 +55,7 @@ class EventController extends Controller
      */
     public function available()
     {
+        Artisan::call('app:update-event-status');
         $events = Event::where('status', operator: 'Available')->get();
         return view('events.availables', compact('events'));
     }
@@ -68,13 +71,18 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(EventRequest $request, string $id)
     {
-        logger('TESTEO DE LA FUNCIONALIDAD DE ACTUALIZAR -=> ');
+        $validatedData = $request->validated();
+
+        $event = Event::findOrFail($id);
+        $event->update(attributes: $validatedData);
+
+        return redirect()->route('events.index')->with('success', 'The event was updated correctly.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Method to search for an event by its id and replace it with the incoming one.
      */
     public function destroy(Event $event)
     {
