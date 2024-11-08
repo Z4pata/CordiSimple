@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 // Route for dashboard
 Route::get('/admin/dashboard', [EventController::class, 'index'])->middleware(['auth', 'verified'])->name('events.index');

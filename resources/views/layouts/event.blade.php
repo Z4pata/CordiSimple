@@ -17,6 +17,8 @@
 </head>
 
 <body>
+    {{-- Nav bar --}}
+    @include('layouts.navigation')
     <!-- component -->
     <main class="mt-10">
         <div class="container mx-auto px-4 sm:px-6">
