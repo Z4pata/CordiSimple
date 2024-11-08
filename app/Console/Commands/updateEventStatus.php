@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class updateEventStatus extends Command
 {
@@ -27,6 +28,8 @@ class updateEventStatus extends Command
      */
     public function handle()
     {
+        Log::info('El comando se está ejecutando');
+
         Event::where('status', '!=', 'finished')
             ->where('date', '<', Carbon::now()->toDateString())
             ->orWhere(function ($query){
