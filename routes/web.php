@@ -4,7 +4,6 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {
@@ -15,7 +14,7 @@ Route::get('/', function () {
 Route::get('/admin/dashboard', [EventController::class, 'index'])->middleware(['auth', 'verified'])->name('events.index');
 Route::get('/user/dashboard', [EventController::class, 'available'])->middleware(['auth', 'verified'])->name('events.available');
 
-Route::resource('/event', EventController::class);
+    Route::resource('events', controller: EventController::class);
 
 
 Route::get('/email/verify', function () {
