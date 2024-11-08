@@ -5,13 +5,13 @@
             <div class="flex justify-between w-full">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ Auth::check() && Auth::user()->isAdmin() ? url('admin/dashboard') : url('dashboard') }}">
+                    <a href="{{ route('welcome') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
 
                     <div class="flex lg:justify-center lg:col-span-1">
                         <a
-                            href="{{ Auth::check() && Auth::user()->isAdmin() ? url('admin/dashboard') : url('dashboard') }}">
+                            href="{{ route('welcome') }}">
                             <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mx-12">CordiSimple</h1>
                         </a>
                     </div>
@@ -20,12 +20,10 @@
                 @auth
                     <div class="flex">
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <x-nav-link :href="request()->routeIs('welcome') && Auth::check() && Auth::user()->isAdmin()
+                            <x-nav-link :href="Auth::check() && Auth::user()->isAdmin()
                                 ? url('admin/dashboard')
-                                : (!request()->routeIs('welcome')
-                                    ? route('welcome')
-                                    : url('user/dashboard'))" :active="request()->routeIs('events.index' || 'events.available')">
-                                {{ !request()->routeIs('welcome') ? __('Home') : __('Dashboard') }}
+                                : url('user/dashboard')" :active="request()->routeIs('events.index' || 'events.available')">
+                                {{ __('Dashboard') }}
                             </x-nav-link>
                         </div>
                         <!-- Settings Dropdown -->
