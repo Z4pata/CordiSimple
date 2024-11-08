@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    //
     use HasFactory;
 
     /*
@@ -71,6 +72,10 @@ class Event extends Model
     */
 
     public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+    public function getDescriptionAttribute($value)
     {
         return ucfirst($value);
     }

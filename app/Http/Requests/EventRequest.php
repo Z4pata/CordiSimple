@@ -28,9 +28,8 @@ class EventRequest extends FormRequest
             'time' => 'required|date_format:H:i',
             'location' => 'required|string|max:150',
             'max_seats' => 'required|integer|min:1',
-            'available_seats' => 'required|integer|min:0|max:max_seats',
+            'available_seats' => 'required|integer|min:0|max:'.$this->input('max_seats'),
             'status' => 'required|string|max:100',
-            'admin_id' => 'required|exists:users,id',
         ];
     }
 
@@ -52,8 +51,6 @@ class EventRequest extends FormRequest
             'available_seats.integer' => 'The number of available seats must be an integer.',
             'available_seats.max' => 'The available seats cannot exceed the maximum number of seats.',
             'status.required' => 'The event status is required.',
-            'admin_id.required' => 'An administrator for the event must be specified.',
-            'admin_id.exists' => 'The specified administrator does not exist.',
         ];
     }
 }

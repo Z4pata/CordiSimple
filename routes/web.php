@@ -4,25 +4,18 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('events')->name('events.')->group(function () {
-    // Resource Routes
-    Route::resource('/', EventController::class);
+// Route for dashboard
+Route::get('/admin/dashboard', [EventController::class, 'index'])->middleware(['auth', 'verified'])->name('events.index');
+Route::get('/user/dashboard', [EventController::class, 'available'])->middleware(['auth', 'verified'])->name('events.available');
 
-    // Additional routes
-    Route::get('/availables', [EventController::class, 'availables'])->name('availables');
-});
+    Route::resource('events', controller: EventController::class);
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -43,5 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/users', [ProfileController::class, 'getAll']);
 
 require __DIR__.'/auth.php';

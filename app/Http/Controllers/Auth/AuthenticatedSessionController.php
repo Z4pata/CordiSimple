@@ -27,14 +27,14 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        // Obtener el usuario autenticado
+        // Obtains athenticated user
         $user = Auth::user();
 
         // Verify if the user is an administrator
         if ($user->isAdmin()) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('events.index');
         } else {
-            return redirect()->route('user.dashboard');
+            return redirect()->route('events.available');
         }
     }
 
