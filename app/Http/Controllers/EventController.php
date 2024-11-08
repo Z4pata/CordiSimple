@@ -79,7 +79,7 @@ class EventController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Method to search for an event by its id and replace it with the incoming one.
      */
     public function destroy(Event $event)
     {
