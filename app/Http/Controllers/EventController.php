@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -21,25 +23,25 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
         return view(view: 'events.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
         $validatedData = $request->validated();
-
-        Event::create($validatedData);
-        return redirect()->route(route: 'events.index')->with('success', 'The event was created correctly.');
+        $adminId = Auth::id();
+        $data = array_merge($validatedData, ['admin_id' => $adminId]);
+        Event::create(attributes: $data);
+        return redirect()->route('events.index')->with('success', 'The event was created correctly.');
     }
 
     /**
      * Display the specified resource.
      */
-        //
+    //
     public function show(string $id)
     {
         $event = Event::findOrFail($id);
@@ -66,9 +68,14 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(EventRequest $request, string $id)
     {
-        //
+        $validatedData = $request->validated();
+
+        $event = Event::findOrFail($id);
+        $event->update(attributes: $validatedData);
+
+        return redirect()->route('events.index')->with('success', 'The event was updated correctly.');
     }
 
     /**
