@@ -29,7 +29,8 @@
                             class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
                             <input type="text" id="name" placeholder="Musical concert" name="name"
                                 value="{{ old('name', $event->name ?? '') }}"
-                                class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm" />
+                                class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                                autocomplete="off" />
                             <span
                                 class="absolute start-0 top-2 -translate-y-1/2 text-xs text-orange-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
                                 Name
@@ -78,7 +79,7 @@
                             <select id="status" name="status"
                                 class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
                                 required>
-                                <option value="" disabled>Select Status</option>
+                                <option value="" disabled {{ !$event ? 'selected' : '' }}>Select Status</option>
                                 <option class="text-orange-600" value="available" @selected(old('status', $event->status ?? '') == 'available')>Available
                                 </option>
                                 <option class="text-orange-600" value="cancelled" @selected(old('status', $event->status ?? '') == 'cancelled')>Cancelled
@@ -104,7 +105,7 @@
 
                         <label for="max_seats"
                             class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
-                            <input type="number" id="max_seats" name="max_seats" placeholder="Max Seats" min="0"
+                            <input type="number" id="max_seats" name="max_seats" placeholder="Total amount of gauging" min="0"
                                 value="{{ old('max_seats', $event->max_seats ?? '') }}"
                                 class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
                                 required />
@@ -121,7 +122,7 @@
                             <label for="available_seats"
                                 class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
                                 <input type="number" id="available_seats" name="available_seats"
-                                    placeholder="Available Seats" min="0"
+                                    placeholder="Amount of available capacity" min="0"
                                     value="{{ old('available_seats', $event->available_seats ?? '') }}"
                                     class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
                                     required />
@@ -141,10 +142,11 @@
 
                         <label for="location"
                             class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
-                            <input type="text" id="location" name="location" placeholder="City"
+                            <input type="text" id="location" name="location" placeholder="Town, City, Country"
                                 value="{{ old('location', $event->location ?? '') }}"
                                 class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                                required />
+                                required
+                                autocomplete="off" />
                             <span
                                 class="absolute start-0 top-2 -translate-y-1/2 text-xs text-orange-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
                                 Location
@@ -158,10 +160,9 @@
 
                     <label for="description"
                         class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
-                        <textarea id="description" name="description" placeholder="Describe the event"
+                        <textarea id="description" name="description" placeholder="Description of the event"
                             class="input input-filled peer h-16 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                            style="max-height: 100px; overflow-y: auto;" required>{{ old('description', $event->description ?? '') }}
-                        </textarea>
+                            style="max-height: 100px; overflow-y: auto;" required>{{ old('description', $event->description ?? '') }}</textarea>
                         <span
                             class="absolute start-0 top-2 -translate-y-1/2 text-xs text-orange-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
                             Description
@@ -170,21 +171,6 @@
                     @error('description')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
-
-                    {{-- <label for="admin_id"
-                        class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
-                        <input type="number" id="admin_id" name="admin_id" placeholder="Admin Id" min="0"
-                            value="{{ old('admin_id', $event->admin_id ?? '') }}"
-                            class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                            required />
-                        <span
-                            class="absolute start-0 top-2 -translate-y-1/2 text-xs text-orange-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
-                            Id Administrator
-                        </span>
-                    </label>
-                    @error('admin_id')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror --}}
 
                 </div>
 
