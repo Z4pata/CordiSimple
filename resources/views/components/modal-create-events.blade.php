@@ -170,22 +170,6 @@
                     @error('description')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
-
-                    {{-- <label for="admin_id"
-                        class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
-                        <input type="number" id="admin_id" name="admin_id" placeholder="Admin Id" min="0"
-                            value="{{ old('admin_id', $event->admin_id ?? '') }}"
-                            class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                            required />
-                        <span
-                            class="absolute start-0 top-2 -translate-y-1/2 text-xs text-orange-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
-                            Id Administrator
-                        </span>
-                    </label>
-                    @error('admin_id')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror --}}
-
                 </div>
 
                 <div class="modal-footer">

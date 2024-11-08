@@ -68,9 +68,14 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(EventRequest $request, string $id)
     {
-        logger('TESTEO DE LA FUNCIONALIDAD DE ACTUALIZAR -=> ');
+        $validatedData = $request->validated();
+
+        $event = Event::findOrFail($id);
+        $event->update(attributes: $validatedData);
+
+        return redirect()->route('events.index')->with('success', 'The event was updated correctly.');
     }
 
     /**
