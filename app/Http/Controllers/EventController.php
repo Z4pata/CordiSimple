@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\EventUpdateRequest;
 use App\Models\Event;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -71,15 +71,15 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(EventRequest $request, string $id)
-    {
-        $validatedData = $request->validated();
 
-        $event = Event::findOrFail($id);
-        $event->update(attributes: $validatedData);
+     public function update(EventUpdateRequest $request, string $id)
+     {
+         $validatedData = $request->validated();
+         $event = Event::findOrFail($id);
+         $event->update($validatedData);
 
-        return redirect()->route('events.index')->with('success', 'The event was updated correctly.');
-    }
+         return redirect()->route('events.index')->with('success', 'The event was updated correctly.');
+     }
 
     /**
      * Method to search for an event by its id and replace it with the incoming one.
