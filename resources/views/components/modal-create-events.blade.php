@@ -1,6 +1,6 @@
 @props(['event' => null])
 @php
-    $number = $event ? $event->id : 0;
+    $number = isset($event) ? $event->id : 0;
 @endphp
 
 <div id="modal-create{{ $number }}" class="overlay modal overlay-open:opacity-100 hidden" role="dialog"
@@ -8,14 +8,14 @@
     <div class="modal-dialog overlay-open:opacity-100 modal-dialog-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">{{ $event ? 'Update Event' : 'Create New Event' }}
+                <h3 class="modal-title">{{ isset($event) ? 'Update Event' : 'Create New Event' }}
                     <button type="button" class="btn btn-text btn-circle btn-sm absolute end-3 top-3" aria-label="Close"
                         data-overlay="#modal-create{{ $number }}">
                         <span class="icon-[tabler--x] size-4"></span>
                     </button>
                 </h3>
             </div>
-            <form method="POST" action="{{ $event ? route('events.update', $event->id) : route('events.store') }}">
+            <form action="{{ $event ? route('events.update', $event->id) : route('events.store') }}" method="POST">
                 @csrf
                 @if ($event)
                     @method('PUT')
@@ -28,8 +28,9 @@
                         <label for="name"
                             class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
                             <input type="text" id="name" placeholder="Musical concert" name="name"
-                                value="{{ old('name', $event->name ?? '') }}"
-                                class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm" />
+                                value="{{ $event->name ?? '' }}"
+                                class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                                autocomplete="off" />
                             <span
                                 class="absolute start-0 top-2 -translate-y-1/2 text-xs text-orange-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
                                 Name
@@ -41,8 +42,7 @@
 
                         <label for="date"
                             class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
-                            <input type="date" id="date" name="date"
-                                value="{{ old('date', $event->date ?? '') }}"
+                            <input type="date" id="date" name="date" value="{{ $event->date ?? '' }}"
                                 class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
                                 required />
                             <span
@@ -60,8 +60,7 @@
 
                         <label for="time"
                             class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
-                            <input type="time" id="time" name="time"
-                                value="{{ old('time', $event->time ?? '') }}"
+                            <input type="time" id="time" name="time" value="{{ $event->time ?? '' }}"
                                 class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
                                 required />
                             <span
@@ -78,16 +77,13 @@
                             <select id="status" name="status"
                                 class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
                                 required>
-                                <option value="" disabled>Select Status</option>
-                                <option class="text-orange-600" value="available" @selected(old('status', $event->status ?? '') == 'available')>Available
-                                </option>
-                                <option class="text-orange-600" value="cancelled" @selected(old('status', $event->status ?? '') == 'cancelled')>Cancelled
-                                </option>
-                                <option class="text-orange-600" value="finished" @selected(old('status', $event->status ?? '') == 'finished')>Finished
-                                </option>
-                                <option class="text-orange-600" value="not available" @selected(old('status', $event->status ?? '') == 'not available')>Not
-                                    Available</option>
+                                <option value="" disabled selected>Select Status</option>
+                                <option class="text-orange-600" value="available">Available</option>
+                                <option class="text-orange-600" value="cancelled">Cancelled</option>
+                                <option class="text-orange-600" value="finished">Finished</option>
+                                <option class="text-orange-600" value="not available">Not Available</option>
                             </select>
+
 
                             <span
                                 class="absolute start-0 top-2 -translate-y-1/2 text-xs text-orange-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
@@ -104,8 +100,8 @@
 
                         <label for="max_seats"
                             class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
-                            <input type="number" id="max_seats" name="max_seats" placeholder="Max Seats" min="0"
-                                value="{{ old('max_seats', $event->max_seats ?? '') }}"
+                            <input type="number" id="max_seats" name="max_seats" placeholder="Total amount of gauging"
+                                min="0" value="{{ $event->max_seats ?? '' }}"
                                 class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
                                 required />
                             <span
@@ -121,8 +117,8 @@
                             <label for="available_seats"
                                 class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
                                 <input type="number" id="available_seats" name="available_seats"
-                                    placeholder="Available Seats" min="0"
-                                    value="{{ old('available_seats', $event->available_seats ?? '') }}"
+                                    placeholder="Amount of available capacity" min="0"
+                                    value="{{ $event->available_seats ?? '' }}"
                                     class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
                                     required />
                                 <span
@@ -141,10 +137,10 @@
 
                         <label for="location"
                             class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
-                            <input type="text" id="location" name="location" placeholder="City"
-                                value="{{ old('location', $event->location ?? '') }}"
+                            <input type="text" id="location" name="location" placeholder="Town, City, Country"
+                                value="{{ $event->location ?? '' }}"
                                 class="input input-filled peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                                required />
+                                required autocomplete="off" />
                             <span
                                 class="absolute start-0 top-2 -translate-y-1/2 text-xs text-orange-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
                                 Location
@@ -158,10 +154,9 @@
 
                     <label for="description"
                         class="w-80 relative block overflow-hidden border-b border-orange-400 bg-transparent pt-3 focus-within:border-orange-700">
-                        <textarea id="description" name="description" placeholder="Describe the event"
+                        <textarea id="description" name="description" placeholder="Description of the event"
                             class="input input-filled peer h-16 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                            style="max-height: 100px; overflow-y: auto;" required>{{ old('description', $event->description ?? '') }}
-                        </textarea>
+                            style="max-height: 100px; overflow-y: auto;" required>{{ $event->description ?? '' }}</textarea>
                         <span
                             class="absolute start-0 top-2 -translate-y-1/2 text-xs text-orange-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
                             Description
