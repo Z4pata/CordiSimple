@@ -17,12 +17,27 @@
 </head>
 
 <body>
+    {{-- Nav bar --}}
+    @include('layouts.navigation')
+    
     <!-- component -->
     <main class="mt-10">
         <div class="container mx-auto px-4 sm:px-6">
             @yield('content')
         </div>
     </main>
+
+    <footer class="flex justify-around items-center h-20 mt-8 w-full bg-cBlack">
+        <div class="flex items-center text-cWhite text-2xl">
+            CordiSimple
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="https://github.com/Jhon-Develop/CordiSimple" class="text-cWhite text-lg"> Github </a>
+            <a href="" class="text-cWhite text-lg"> Gmail </a>
+
+        </div>
+    </footer>
+
     <script src="{{ asset('js/flyonui.js') }}"></script>
 </body>
 

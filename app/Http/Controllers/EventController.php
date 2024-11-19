@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventRequest;
+use App\Http\Requests\EventUpdateRequest;
 use App\Models\Event;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -12,6 +15,7 @@ class EventController extends Controller
      */
     public function index()
     {
+        Artisan::call('app:update-event-status');
         $events = Event::all();
         return view('events.index', data: compact('events'));
     }
@@ -21,25 +25,25 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
         return view(view: 'events.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
         $validatedData = $request->validated();
-
-        Event::create($validatedData);
-        return redirect()->route(route: 'events.index')->with('success', 'The event was created correctly.');
+        $adminId = Auth::id();
+        $data = array_merge($validatedData, ['admin_id' => $adminId]);
+        Event::create(attributes: $data);
+        return redirect()->route('events.index')->with('success', 'The event was created correctly.');
     }
 
     /**
      * Display the specified resource.
      */
-        //
+    //
     public function show(string $id)
     {
         $event = Event::findOrFail($id);
@@ -49,8 +53,9 @@ class EventController extends Controller
     /**
      * Display the available events.
      */
-    public function availables()
+    public function available()
     {
+        Artisan::call('app:update-event-status');
         $events = Event::where('status', operator: 'Available')->get();
         return view('events.availables', compact('events'));
     }
@@ -66,16 +71,23 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
-    {
-        //
-    }
+
+     public function update(EventUpdateRequest $request, string $id)
+     {
+         $validatedData = $request->validated();
+         $event = Event::findOrFail($id);
+         $event->update($validatedData);
+
+         return redirect()->route('events.index')->with('success', 'The event was updated correctly.');
+     }
 
     /**
-     * Remove the specified resource from storage.
+     * Method to search for an event by its id and replace it with the incoming one.
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+
+        return redirect()->route(route: 'events.index')->with('success', 'Event deleted successfully!');
     }
 }

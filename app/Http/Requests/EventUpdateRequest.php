@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EventRequest extends FormRequest
+class EventUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,7 +19,7 @@ class EventRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             'name' => 'required|string|max:100',
@@ -28,7 +28,6 @@ class EventRequest extends FormRequest
             'time' => 'required',
             'location' => 'required|string|max:150',
             'max_seats' => 'required|integer|min:1',
-            'available_seats' => 'required|integer|min:0|max:'.$this->input('max_seats'),
             'status' => 'required|string|max:100',
         ];
     }
@@ -45,9 +44,6 @@ class EventRequest extends FormRequest
             'max_seats.required' => 'You must specify the maximum number of seats.',
             'max_seats.integer' => 'The maximum number of seats must be an integer.',
             'max_seats.min' => 'The maximum number of seats must be at least 1.',
-            'available_seats.required' => 'You must specify the number of available seats.',
-            'available_seats.integer' => 'The number of available seats must be an integer.',
-            'available_seats.max' => 'The available seats cannot exceed the maximum number of seats.',
             'status.required' => 'The event status is required.',
         ];
     }
