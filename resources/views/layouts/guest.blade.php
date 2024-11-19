@@ -16,13 +16,14 @@
     </head>
     <body class="font-sans text-cBlack antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-cWhite dark:bg-cBlack">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-cGray" />
-                </a>
-            </div>
+            
 
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-cWhite dark:bg-cGray shadow-md overflow-hidden sm:rounded-lg">
+                <div class="w-full flex items-center justify-center mb-4">
+                    <a href="/">
+                        <x-application-logo class="w-20 h-24 fill-current text-cGray" />
+                    </a>
+                </div>
                 {{ $slot }}
             </div>
         </div>
