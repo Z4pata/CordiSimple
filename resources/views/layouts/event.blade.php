@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="bg-cBlack">
 
 <head>
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="15days">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('event.name', 'CordiSimple') }}</title>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -27,7 +27,7 @@
         </div>
     </main>
 
-    <footer class="flex justify-around items-center h-20 mt-8 w-full bg-cBlack">
+    <footer class="flex justify-around items-center h-20 mt-8 w-full bg-cBlack absolute bottom-0">
         <div class="flex items-center text-cWhite text-2xl">
             CordiSimple
         </div>
