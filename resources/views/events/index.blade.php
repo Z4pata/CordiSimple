@@ -23,7 +23,7 @@
     {{-- Table to display the events --}}
     <div class="card w-full">
         <div class="w-full overflow-x-auto">
-            <table class="table">
+            <table class="table bg-cBlack">
                 <thead>
                     <tr>
                         <th>Name</th>
