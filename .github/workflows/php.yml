@@ -17,6 +17,17 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Set up PHP 8.3
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.2
+
+    - name: Verificar versión de PHP
+      run: php -v
+
+    - name: Diff composer.lock and .json
+      run: git diff composer.lock
+
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
